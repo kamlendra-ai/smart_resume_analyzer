@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-grid">
+    <div class="hero-text">
+        <h1>Plan Your Career with BBDU Smart Analyzer</h1>
+        <p class="subtitle">
+            Upload your resume, select your dream profile, and let the system
+            highlight your strengths, missing skills and a clear learning roadmap.
+            Designed specially for BBDU students preparing for placements.
+        </p>
+
+        <div class="features-row">
+            <div class="feature-pill">✅ Skill Match Score</div>
+            <div class="feature-pill">📚 Personalized Roadmap</div>
+            <div class="feature-pill">📊 History Saved in Database</div>
+        </div>
+    </div>
+
+   <div class="hero-image">
+    <div class="hero-img-inner">
+
+        <!-- BBD Logo -->
+        <img src="{{ url_for('static', filename='images/bbdu_logo.png') }}"
+             alt="BBD University Logo"
+             class="bbdu-logo">
+
+        <!-- Ye line BBD University ke text ke liye hai -->
+        <p class="bbd-text">BBD University</p>
+
+        <div class="hero-cta">
+            <p>“From Resume to Ready.”</p>
+            <span>Analyze · Improve · Achieve</span>
+        </div>
+
+    </div>
+</div>
+
+
+{% if error %}
+    <div class="alert">{{ error }}</div>
+{% endif %}
+
+<form class="form-grid" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="student_name">Student Name (optional)</label>
+        <input type="text" id="student_name" name="student_name" placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+        <label for="reg_no">Enrollment / Roll No.</label>
+        <input type="text" id="reg_no" name="reg_no" placeholder="e.g., BBDU/BCA/23/001">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email ID</label>
+        <input type="email" id="email" name="email" placeholder="name@bbducollege.ac.in">
+        <p class="hint">Used only for display in report. Not sent anywhere.</p>
+    </div>
+
+    <div class="form-group">
+        <label for="target_role">Choose Target Career Path</label>
+        <select id="target_role" name="target_role" required>
+            {% for key, info in career_paths.items() %}
+                <option value="{{ key }}">{{ info.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group full-row">
+        <label for="resume">Upload Resume (PDF only)</label>
+        <input type="file" id="resume" name="resume" accept="application/pdf" required>
+        <p class="hint">Tip: Upload your latest resume with all technical skills mentioned clearly.</p>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit">Analyze My Resume</button>
+        <span class="small-note">
+            Processing happens locally on this machine. Data is stored only in the BBDU project database.
+        </span>
+    </div>
+</form>
+{% endblock %}

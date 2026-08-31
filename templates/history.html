@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Recent Analysis History</h1>
+<p class="subtitle">
+    Last 20 analyses stored in the BBDU project database. Use this page in viva to show backend + DB integration.
+</p>
+
+<div class="history-card">
+    <table class="history-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Student Name</th>
+            <th>Enrollment No.</th>
+            <th>Target Role</th>
+            <th>Match %</th>
+            <th>Analyzed At</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if rows %}
+            {% for row in rows %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ row["student_name"] or "-" }}</td>
+                    <td>{{ row["reg_no"] or "-" }}</td>
+                    <td>{{ row["target_name"] }}</td>
+                    <td>{{ row["match_percent"] }}%</td>
+                    <td>{{ row["analyzed_at"] }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" class="empty-row">No analysis records found yet.</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{{ url_for('index') }}" class="back-link">← Back to Analyzer</a>
+{% endblock %}

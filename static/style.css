@@ -1,0 +1,564 @@
+/* GLOBAL */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top left, #0f172a, #020617);
+    color: #e5e7eb;
+}
+
+/* LAYOUT WRAPPER */
+
+.app-bg {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background: linear-gradient(to right, rgba(15,23,42,0.97), rgba(37,99,235,0.9));
+    box-shadow: 0 10px 30px rgba(15,23,42,0.8);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: radial-gradient(circle at top left, #22c55e, #4f46e5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: #f9fafb;
+}
+
+.nav-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+.nav-subtitle {
+    font-size: 11px;
+    color: #cbd5f5;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-link {
+    font-size: 13px;
+    text-decoration: none;
+    color: #e5e7eb;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: 0.15s ease;
+}
+
+.nav-link:hover {
+    border-color: rgba(191, 219, 254, 0.7);
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(191, 219, 254, 0.7);
+    color: #e5e7eb;
+}
+
+/* MAIN CONTENT */
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 26px 16px 24px 16px;
+}
+
+.glass-card {
+    width: 100%;
+    max-width: 1100px;
+    padding: 24px 26px 30px 26px;
+    border-radius: 22px;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+}
+
+/* HERO SECTION */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 24px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.hero-text h1 {
+    margin: 0 0 8px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+.subtitle {
+    margin: 0 0 18px 0;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.features-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.feature-pill {
+    font-size: 11px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.75);
+    background: rgba(15, 23, 42, 0.9);
+}
+
+/* HERO IMAGE CARD */
+
+.hero-image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-img-inner {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 4/5;
+    border-radius: 22px;
+    background: radial-gradient(circle at top, #1d4ed8, #020617);
+    border: 1px solid rgba(129, 140, 248, 0.65);
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.9);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ====== NEW: BBDU LOGO PILL (NO IMAGE) ====== */
+
+.bbdu-logo-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+    margin-bottom: 10px;
+}
+
+.bbdu-logo-dot {
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at top left, #22c55e, #15803d);
+    border-radius: 50%;
+}
+
+.bbdu-logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 1px;
+}
+
+/* (Old .bbdu-logo for image – ab use nahi ho raha, rehne do) */
+.bbdu-logo {
+    width: 70%;
+    border-radius: 16px;
+    object-fit: contain;
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.hero-cta {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.65);
+    font-size: 12px;
+}
+
+.hero-cta p {
+    margin: 0 0 4px 0;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+.hero-cta span {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* FORMS */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 20px;
+    margin-top: 6px;
+}
+
+@media (max-width: 820px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-image {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 720px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #e5e7eb;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 13px;
+}
+
+.full-row {
+    grid-column: 1 / -1;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 13px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: #2563eb;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #1d4ed8;
+}
+
+.hint {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4f46e5, #22c55e);
+    color: white;
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(34, 197, 94, 0.7);
+}
+
+.small-note {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.alert {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    background: rgba(248, 113, 113, 0.15);
+    border: 1px solid rgba(248, 113, 113, 0.7);
+    color: #fecaca;
+}
+
+/* RESULT PAGE */
+
+h1 {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #f9fafb;
+}
+
+.top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 720px) {
+    .top-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-card {
+    background: radial-gradient(circle at top, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.95));
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 1px solid rgba(129, 140, 248, 0.45);
+}
+
+.stat-card.big {
+    padding: 18px 20px;
+}
+
+.stat-card h2,
+.stat-card h3 {
+    margin: 0 0 8px 0;
+    color: #e5e7eb;
+}
+
+.match-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.match-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #a5b4fc;
+    line-height: 1;
+}
+
+.percent-symbol {
+    font-size: 20px;
+    margin-left: 2px;
+}
+
+.match-text p {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: #d1d5db;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 11px;
+    border-radius: 999px;
+    background: rgba(31, 41, 55, 0.9);
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #22c55e, #4f46e5, #22d3ee);
+}
+
+/* CARDS + TAGS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: rgba(15, 23, 42, 0.96);
+    border-radius: 16px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    padding: 16px;
+}
+
+.card h3 {
+    margin: 0 0 10px 0;
+    color: #e5e7eb;
+}
+
+.tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+}
+
+.tag-good {
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.65);
+    color: #bbf7d0;
+}
+
+.tag-missing {
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.65);
+    color: #fecaca;
+}
+
+.roadmap-list {
+    margin: 0 0 8px 0;
+    padding-left: 18px;
+    font-size: 13px;
+    color: #e5e7eb;
+}
+
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.back-link {
+    font-size: 13px;
+    text-decoration: none;
+    color: #60a5fa;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* HISTORY TABLE */
+
+.history-card {
+    margin-top: 10px;
+    background: rgba(15, 23, 42, 0.96);
+    border-radius: 18px;
+    border: 1px solid rgba(75, 85, 99, 0.9);
+    padding: 14px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.history-table th,
+.history-table td {
+    padding: 8px 6px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.history-table th {
+    text-align: left;
+    font-weight: 500;
+    color: #e5e7eb;
+}
+
+.history-table td {
+    color: #d1d5db;
+}
+
+.history-table tr:hover td {
+    background: rgba(15, 23, 42, 0.9);
+}
+
+.empty-row {
+    text-align: center;
+    color: #9ca3af;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    padding: 10px 0 14px 0;
+    font-size: 11px;
+    color: #9ca3af;
+}
+.bbdu-text {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #e5e7eb;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 6px 14px;
+    border-radius: 999px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+}

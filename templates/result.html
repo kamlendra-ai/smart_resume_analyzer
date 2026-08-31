@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Analysis Summary</h1>
+<p class="subtitle">
+    {% if student_name %}
+        Hi <strong>{{ student_name }}</strong>, here is your analysis for:
+    {% else %}
+        Here is your analysis for:
+    {% endif %}
+    <strong>{{ target_name }}</strong>
+</p>
+
+<div class="top-grid">
+
+    <!-- SKILL MATCH CARD -->
+    <div class="stat-card big">
+        <h2>Skill Match Score</h2>
+        <div class="match-row">
+            <div class="match-number">
+                {{ match_percent }}<span class="percent-symbol">%</span>
+            </div>
+            <div class="match-text">
+                <p>Your resume matches {{ match_percent }}% of the recommended skills for this role.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ match_percent }}%;"></div>
+                </div>
+                <p class="hint">
+                    Higher percentage means you are closer to being job-ready for this profile.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STUDENT DETAILS -->
+    <div class="stat-card">
+        <h3>Student Details</h3>
+        <p><strong>Name:</strong> {{ student_name or "Not provided" }}</p>
+        <p><strong>Enrollment No:</strong> {{ reg_no or "Not provided" }}</p>
+        <p><strong>Email:</strong> {{ email or "Not provided" }}</p>
+        <p class="hint">These details are saved in the BBDU project database.</p>
+    </div>
+
+</div>
+
+
+<!-- ⭐⭐⭐ AI RESUME SCAN (MAIN CARD) ⭐⭐⭐ -->
+<div class="stat-card big" style="margin-top: 16px;">
+    <h2>AI Resume Scan – Best Career Match</h2>
+
+    <div class="match-row">
+        <div class="match-number">
+            {{ ai_best_score }}
+        </div>
+        <span class="percent-symbol">%</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ ai_best_score }}%;"></div>
+    </div>
+
+    <p class="subtitle" style="margin-top: 8px;">
+        Best Fit Role According to AI:
+        <strong>{{ ai_best_role }}</strong>
+    </p>
+
+    <p class="hint">Score generated using TF-IDF & Cosine Similarity on full resume text.</p>
+</div>
+
+
+<!-- ⭐ ALL ROLES AI SCORE LIST ⭐ -->
+<div class="card" style="margin-top: 16px;">
+    <h3>AI Score for All Career Roles</h3>
+
+    <ul class="tag-list">
+        {% for role, score in ai_scores.items() %}
+            <li class="tag tag-good">{{ role }} – {{ score }}%</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+<!-- MATCHED vs MISSING SKILLS -->
+<div class="grid">
+    <div class="card">
+        <h3>Skills Found in Your Resume</h3>
+        {% if matched_skills %}
+            <ul class="tag-list">
+                {% for skill in matched_skills %}
+                    <li class="tag tag-good">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No matching skills detected from the recommended list.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h3>Missing / Recommended Skills</h3>
+        {% if missing_skills %}
+            <ul class="tag-list">
+                {% for skill in missing_skills %}
+                    <li class="tag tag-missing">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Great! You already have all the recommended skills for this role.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="card">
+    <h3>Suggested Learning Roadmap</h3>
+    <ol class="roadmap-list">
+        {% for step in roadmap %}
+            <li>{{ step }}</li>
+        {% endfor %}
+    </ol>
+    <p class="hint">
+        You can directly copy this roadmap into your project report as “System Output & Recommendations”.
+    </p>
+</div>
+
+<!-- BUTTONS -->
+<div class="result-actions">
+    <a href="{{ url_for('index') }}" class="back-link">← Analyze Another Resume</a>
+    <a href="{{ url_for('history') }}" class="back-link">📊 View Saved Analysis History</a>
+</div>
+
+{% endblock %}
