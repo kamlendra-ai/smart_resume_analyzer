@@ -3,6 +3,7 @@ from PyPDF2 import PdfReader
 import sqlite3
 import datetime
 import re
+import os
 
 # AI / ML Libraries
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -11,7 +12,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
-DB_NAME = "bbduanalyzer.db"
+# Serverless (Vercel) environment me filesystem read-only hoti hai, isliye /tmp use karte hain
+if os.environ.get("VERCEL"):
+    DB_NAME = "/tmp/bbduanalyzer.db"
+else:
+    DB_NAME = "bbduanalyzer.db"
 
 
 # ============================================================
@@ -22,6 +27,24 @@ def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(DB_NAME)
         g.db.row_factory = sqlite3.Row
+        try:
+            g.db.execute("""
+                CREATE TABLE IF NOT EXISTS analysis (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    student_name TEXT,
+                    reg_no TEXT,
+                    email TEXT,
+                    target_role TEXT,
+                    target_name TEXT,
+                    match_percent INTEGER,
+                    ai_best_role TEXT,
+                    ai_best_score REAL,
+                    analyzed_at TEXT
+                )
+            """)
+            g.db.commit()
+        except Exception:
+            pass
     return g.db
 
 
@@ -34,31 +57,9 @@ def close_db(exception):
 
 
 def init_db():
-    db = get_db()
-
-    # Development ke liye fresh table
-    db.execute("DROP TABLE IF EXISTS analysis")
-
-    db.execute("""
-        CREATE TABLE analysis (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            student_name TEXT,
-            reg_no TEXT,
-            email TEXT,
-            target_role TEXT,
-            target_name TEXT,
-            match_percent INTEGER,
-            ai_best_role TEXT,
-            ai_best_score REAL,
-            analyzed_at TEXT
-        )
-    """)
-
-    db.commit()
+    get_db()
 
 
-with app.app_context():
-    init_db()
 
 
 # ============================================================
